@@ -1,556 +1,1528 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ch — Full-Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0a0a;
-  --bg2: #111111;
-  --bg3: #1a1a1a;
-  --yellow: #F5A800;
-  --yellow-dim: rgba(245,168,0,0.15);
-  --green: #00ff88;
-  --white: #f0f0f0;
-  --dim: #999;
-  --dim2: #555;
-  --border: rgba(255,255,255,0.1);
-}
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: 'Space Mono', monospace;
-  overflow-x: hidden;
-}
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
-  pointer-events: none;
-  z-index: 1000;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chenghong Meng — Full-Stack Developer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #3b5773;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --blue: #1A56DB;
+      --blue-bright: #3B82F6;
+      --yellow: #F5A800;
+      --yellow-dim: rgba(187, 131, 11, 0.2);
+      --green: #00ff88;
+      --white: #f0f0f0;
+      --dim: #d2d1d1;
+      --dim2: #928f8f;
+      --border: rgba(255, 255, 255, 0.1);
+    }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 60px;
-  background: rgba(10,10,10,0.9);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo { font-size: 13px; letter-spacing: 3px; color: var(--yellow); text-decoration: none; }
-.nav-logo::before { content: '> '; color: var(--dim2); }
-.nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--dim); transition: color 0.2s; }
-.nav-links a:hover { color: var(--yellow); }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* STATUS BAR */
-.status-bar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  z-index: 200; height: 28px;
-  background: var(--yellow);
-  display: flex; align-items: center; padding: 0 16px; gap: 24px;
-}
-.status-item { font-size: 10px; letter-spacing: 1px; color: #000; display: flex; align-items: center; gap: 6px; }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #000; animation: blink 2s step-end infinite; }
-.status-sep { color: rgba(0,0,0,0.3); }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* HERO */
-#hero {
-  min-height: 100vh;
-  padding: 140px 60px 100px;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; border-bottom: 1px solid var(--border);
-}
-.hero-terminal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 60px; opacity:0; animation: fadeUp 0.6s ease 0.2s forwards; }
-.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-.td-red { background: #ff5f57; } .td-yellow { background: #febc2e; } .td-green { background: #28c840; }
-.terminal-title { font-size: 11px; letter-spacing: 2px; color: var(--dim); margin-left: 8px; }
-.hero-prompt { font-size: 13px; color: var(--dim); margin-bottom: 16px; opacity:0; animation: fadeUp 0.6s ease 0.4s forwards; }
-.hero-prompt span { color: var(--green); }
-.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(52px,8vw,110px); font-weight: 800; line-height: 0.92; letter-spacing: -3px; margin-bottom: 48px; opacity:0; animation: fadeUp 0.7s ease 0.5s forwards; }
-.hero-title .hl { color: var(--yellow); }
-.hero-title .dim-word { color: var(--dim2); }
-.hero-meta { display: grid; grid-template-columns: repeat(3,auto) 1fr; gap: 0; max-width: 700px; border: 1px solid var(--border); opacity:0; animation: fadeUp 0.6s ease 0.7s forwards; }
-.meta-cell { padding: 16px 24px; border-right: 1px solid var(--border); font-size: 11px; letter-spacing: 1px; }
-.meta-cell:last-child { border-right: none; }
-.meta-label { color: var(--dim); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
-.meta-value { color: var(--white); font-size: 12px; }
-.meta-value.yellow { color: var(--yellow); }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
 
-/* GHOST WINDOWS */
-.win-ghost { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); opacity: 0.35; pointer-events: none; user-select: none; }
-.win-ghost-window { width: 260px; background: #1e1e1e; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; font-size: 11px; margin-bottom: 16px; transform: rotate(var(--rot,0deg)); box-shadow: 0 8px 32px rgba(0,0,0,0.6); overflow: hidden; }
-.win-ghost-title { background: #2d2d2d; color: rgba(255,255,255,0.7); padding: 10px 12px; font-size: 11px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.win-ghost-dots { display: flex; gap: 5px; }
-.win-ghost-dot { width: 10px; height: 10px; border-radius: 50%; }
-.wgd-r{background:#ff5f57;} .wgd-y{background:#febc2e;} .wgd-g{background:#28c840;}
-.win-ghost-body { padding: 10px 14px; color: rgba(245,168,0,0.75); font-size: 11px; line-height: 1.9; letter-spacing: 1px; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.07) 4px);
+      pointer-events: none;
+      z-index: 1000;
+    }
 
-/* SECTION */
-.section { padding: 100px 60px; border-bottom: 1px solid var(--border); position: relative; }
-.section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 64px; }
-.section-num { font-size: 10px; letter-spacing: 3px; color: var(--yellow); }
-.section-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--dim); }
-.section-line { flex: 1; height: 1px; background: var(--border); }
-.section-heading { font-family: 'Syne', sans-serif; font-size: clamp(36px,5vw,60px); font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 56px; }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(10, 10, 10, 0.766);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* ABOUT */
-#about { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
-.about-left { padding: 100px 60px; border-right: 1px solid var(--border); }
-.about-right { padding: 100px 60px; background: var(--bg2); }
-.about-body { font-size: 15px; line-height: 2.1; color: #aaa; margin-bottom: 24px; }
-.about-body strong { color: var(--white); font-weight: 400; }
-.log-block { background: var(--bg); border: 1px solid var(--border); padding: 20px 24px; margin-top: 40px; position: relative; }
-.log-block::before { content: 'system.log'; position: absolute; top: 0; left: 16px; transform: translateY(-50%); background: var(--bg2); padding: 0 8px; font-size: 10px; letter-spacing: 2px; color: var(--dim); }
-.log-line { font-size: 13px; line-height: 2; color: var(--dim); display: flex; gap: 12px; }
-.log-line .ts { color: var(--green); flex-shrink: 0; }
-.log-line .msg { color: #999; }
-.log-line .msg strong { color: var(--white); }
-.stack-table { width: 100%; border-collapse: collapse; }
-.stack-table tr { border-bottom: 1px solid var(--border); }
-.stack-table tr:last-child { border-bottom: none; }
-.stack-table td { padding: 18px 0; font-size: 14px; vertical-align: middle; }
-.stack-table td:first-child { color: var(--white); width: 40%; }
-.stack-table td:nth-child(2) { width: 40%; padding: 0 16px; }
-.stack-table td:last-child { text-align: right; font-size: 11px; letter-spacing: 2px; color: #bbb; }
-.bar { height: 2px; background: var(--dim2); position: relative; }
-.bar::after { content: ''; position: absolute; left:0; top:0; height: 100%; width: var(--pct); background: var(--yellow); }
+    .nav-logo {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--yellow);
+      text-decoration: none;
+    }
 
-/* WORK */
-.project-item { border-top: 1px solid var(--border); padding: 44px 60px; display: grid; grid-template-columns: 48px 1fr 200px; gap: 32px; align-items: start; position: relative; overflow: hidden; }
-.project-item:last-child { border-bottom: 1px solid var(--border); }
-.project-item::before { content: ''; position: absolute; left:0; top:0; bottom:0; width:0; background: var(--yellow-dim); transition: width 0.4s ease; }
-.project-item:hover::before { width: 100%; }
-.proj-num { font-size: 10px; letter-spacing: 2px; color: var(--yellow); padding-top: 4px; }
-.proj-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--white); }
-.proj-desc { font-size: 14px; line-height: 2; color: #888; max-width: 540px; margin-bottom: 20px; }
-.proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.proj-tag { font-size: 11px; letter-spacing: 1px; color: var(--dim); border: 1px solid var(--dim2); padding: 3px 10px; }
-.proj-side { text-align: right; padding-top: 4px; }
-.proj-status { font-size: 10px; letter-spacing: 2px; color: var(--green); margin-bottom: 8px; }
-.proj-status::before { content: '● '; }
-.proj-year { font-size: 10px; letter-spacing: 1px; color: var(--dim); }
+    .nav-logo::before {
+      content: '> ';
+      color: var(--dim2);
+    }
 
-/* PROCESS */
-#process { background: var(--bg2); }
-.process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
-.process-card { background: var(--bg2); padding: 48px 40px; }
-.process-card-num { font-size: 10px; letter-spacing: 3px; color: var(--yellow); margin-bottom: 32px; }
-.process-card h3 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; color: var(--white); }
-.process-card p { font-size: 14px; line-height: 2; color: #777; }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
 
-/* CONTACT */
-#contact { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; }
-.contact-heading { font-family: 'Syne', sans-serif; font-size: clamp(48px,8vw,100px); font-weight: 800; letter-spacing: -3px; line-height: 0.92; margin-bottom: 56px; }
-.contact-heading span { color: var(--yellow); }
-.contact-grid { display: flex; gap: 0; border: 1px solid var(--border); max-width: 600px; }
-.contact-link { flex: 1; padding: 20px 28px; text-decoration: none; color: var(--dim); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border-right: 1px solid var(--border); transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 10px; }
-.contact-link:last-child { border-right: none; }
-.contact-link:hover { color: var(--yellow); background: var(--yellow-dim); }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dim);
+      transition: color 0.2s;
+    }
 
-footer { padding: 24px 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-footer span { font-size: 11px; letter-spacing: 2px; color: var(--dim); }
-.easter-trigger { cursor: pointer; transition: color 0.2s; }
-.easter-trigger:hover { color: var(--yellow); }
+    .nav-links a:hover {
+      color: var(--yellow);
+    }
 
-/* ── MAC TERMINAL OVERLAY ── */
-#terminalOverlay {
-  display: none;
-  position: fixed; inset: 0;
-  z-index: 300;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-}
-#terminalOverlay.active { display: flex; }
+    /* STATUS BAR */
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      height: 28px;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 24px;
+    }
 
-#terminalWindow {
-  width: min(860px, 92vw);
-  height: min(560px, 80vh);
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.9);
-  display: flex; flex-direction: column;
-  overflow: hidden;
-  animation: termIn 0.25s ease;
-}
-@keyframes termIn { from{opacity:0;transform:scale(0.96)} to{opacity:1;transform:scale(1)} }
+    .status-item {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-.term-titlebar {
-  background: #2d2d2d;
-  padding: 12px 16px;
-  display: flex; align-items: center; gap: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  flex-shrink: 0;
-}
-.mac-btn {
-  width: 13px; height: 13px; border-radius: 50%;
-  border: none; cursor: pointer;
-  transition: all 0.15s;
-  flex-shrink: 0;
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0;
-}
-.mac-btn::after {
-  content: '';
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.mac-btn-group:hover .mac-btn::after { opacity: 1; }
-.mac-btn.red { background: #ff5f57; }
-.mac-btn.red::after {
-  content: '×';
-  font-size: 9px; font-weight: 700;
-  color: rgba(0,0,0,0.5);
-  line-height: 1;
-}
-.mac-btn.yellow { background: #febc2e; }
-.mac-btn.yellow::after {
-  content: '−';
-  font-size: 10px; font-weight: 700;
-  color: rgba(0,0,0,0.5);
-  line-height: 1;
-  margin-top: -1px;
-}
-.mac-btn.green { background: #28c840; }
-.mac-btn.green::after {
-  content: '⤢';
-  font-size: 8px; font-weight: 700;
-  color: rgba(0,0,0,0.5);
-  line-height: 1;
-}
-.term-title-text { font-size: 12px; letter-spacing: 2px; color: rgba(255,255,255,0.5); margin-left: 4px; }
-.term-title-status { margin-left: auto; font-size: 10px; letter-spacing: 2px; color: var(--green); }
-.term-title-status.thinking { color: var(--yellow); animation: blink 1s step-end infinite; }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5dda04;
+      animation: blink 2s step-end infinite;
+    }
 
-.term-body {
-  flex: 1; overflow-y: auto; padding: 20px 24px;
-  display: flex; flex-direction: column; gap: 0;
-}
-.term-body::-webkit-scrollbar { width: 4px; }
-.term-body::-webkit-scrollbar-track { background: transparent; }
-.term-body::-webkit-scrollbar-thumb { background: var(--dim2); border-radius: 2px; }
+    .status-sep {
+      color: rgba(0, 0, 0, 0.3);
+    }
 
-.term-line { font-size: 13px; line-height: 1.9; margin-bottom: 2px; white-space: pre-wrap; word-break: break-word; }
-.term-line.system { color: var(--dim2); }
-.term-line.prompt-line { color: var(--green); }
-.term-line.user-input { color: var(--white); }
-.term-line.response { color: rgba(245,168,0,0.9); }
-.term-line.response.error { color: #ff5f57; }
-.term-line.empty { height: 10px; }
+    @keyframes blink {
 
-.term-input-row {
-  padding: 14px 24px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  display: flex; align-items: center; gap: 10px;
-  flex-shrink: 0; background: #161616;
-}
-.term-prompt-label { color: var(--green); font-size: 13px; flex-shrink: 0; }
-#termInput {
-  flex: 1; background: none; border: none; outline: none;
-  font-family: 'Space Mono', monospace; font-size: 13px;
-  color: var(--white); caret-color: var(--yellow);
-}
-#termInput::placeholder { color: var(--dim2); }
-.term-send-hint { font-size: 10px; letter-spacing: 1px; color: var(--dim2); flex-shrink: 0; }
+      0%,
+      100% {
+        opacity: 1
+      }
 
-/* MINIMIZED BAR */
-#termMinBar {
-  display: none;
-  position: fixed; bottom: 36px; left: 50%; transform: translateX(-50%);
-  z-index: 250;
-  background: #2d2d2d;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  padding: 8px 20px;
-  font-size: 11px; letter-spacing: 2px; color: var(--dim);
-  cursor: pointer; transition: color 0.2s, border-color 0.2s;
-  display: none; align-items: center; gap: 10px;
-}
-#termMinBar:hover { color: var(--yellow); border-color: var(--yellow); }
-#termMinBar.visible { display: flex; }
+      50% {
+        opacity: 0
+      }
+    }
 
-/* EASTER EGG */
-#easterEgg { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 500; width: 320px; }
-.mac-popup { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; font-family: 'Space Mono', monospace; box-shadow: 0 24px 60px rgba(0,0,0,0.8); overflow: hidden; }
-.mac-popup-title { background: #2d2d2d; color: rgba(255,255,255,0.7); padding: 12px 14px; font-size: 12px; display: flex; align-items: center; gap: 10px; cursor: move; border-bottom: 1px solid rgba(255,255,255,0.08); letter-spacing: 1px; }
-.mac-popup-dots { display: flex; gap: 6px; }
-.mac-popup-dots span { width: 11px; height: 11px; border-radius: 50%; display: block; }
-.mpd-r{background:#ff5f57;} .mpd-y{background:#febc2e;} .mpd-g{background:#28c840;}
-.mac-popup-body { padding: 20px; font-size: 12px; line-height: 2; color: rgba(245,168,0,0.85); cursor: move; }
-.mac-popup-body p { margin-bottom: 6px; }
-.mac-popup-footer { padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: flex-end; }
-.mac-popup-close-btn { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); padding: 6px 14px; cursor: pointer; transition: all 0.2s; }
-.mac-popup-close-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      padding: 140px 60px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
 
-/* REVEAL */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.in { opacity: 1; transform: none; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+    .hero-terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{padding:16px 24px;} .nav-links{display:none;}
-  #hero{padding:120px 24px 80px;} .win-ghost{display:none;}
-  .hero-meta{grid-template-columns:1fr 1fr;}
-  .section{padding:80px 24px;}
-  #about{grid-template-columns:1fr;}
-  .about-left{padding:80px 24px;border-right:none;border-bottom:1px solid var(--border);}
-  .about-right{padding:80px 24px;}
-  .project-item{grid-template-columns:40px 1fr;padding:44px 24px;}
-  .proj-side{display:none;}
-  .process-grid{grid-template-columns:1fr;}
-  footer{padding:20px 24px;flex-direction:column;gap:8px;}
-  #terminalWindow{height:90vh;}
-}
-</style>
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .td-red {
+      background: #ff5f57;
+    }
+
+    .td-yellow {
+      background: #febc2e;
+    }
+
+    .td-green {
+      background: #28c840;
+    }
+
+    .terminal-title {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--dim);
+      margin-left: 8px;
+    }
+
+    .hero-prompt {
+      font-size: 13px;
+      color: var(--dim);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.4s forwards;
+    }
+
+    .hero-prompt span {
+      color: var(--green);
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -3px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.5s forwards;
+    }
+
+    .hero-title .hl {
+      color: var(--yellow);
+    }
+
+    .hero-title .dim-word {
+      color: var(--dim2);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, auto) 1fr;
+      gap: 0;
+      max-width: 700px;
+      border: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.7s forwards;
+    }
+
+    .meta-cell {
+      padding: 16px 24px;
+      border-right: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .meta-cell:last-child {
+      border-right: none;
+    }
+
+    .meta-label {
+      color: var(--dim);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      color: var(--white);
+      font-size: 12px;
+    }
+
+    .meta-value.yellow {
+      color: var(--yellow);
+    }
+
+    .meta-value.green {
+      color: var(--green);
+    }
+
+    /* GHOST WINDOWS */
+    .win-ghost {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.35;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .win-ghost-window {
+      width: 260px;
+      background: #1e1e1e;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      font-size: 11px;
+      margin-bottom: 16px;
+      transform: rotate(var(--rot, 0deg));
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .win-ghost-title {
+      background: #2d2d2d;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 10px 12px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .win-ghost-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .win-ghost-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .wgd-r {
+      background: #ff5f57;
+    }
+
+    .wgd-y {
+      background: #febc2e;
+    }
+
+    .wgd-g {
+      background: #28c840;
+    }
+
+    .win-ghost-body {
+      padding: 10px 14px;
+      color: rgba(245, 168, 0, 0.75);
+      font-size: 11px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+    }
+
+    /* SECTION */
+    .section {
+      padding: 100px 60px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .section-num {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--yellow);
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 56px;
+    }
+
+    /* ABOUT */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .about-left {
+      padding: 100px 60px;
+      border-right: 1px solid var(--border);
+    }
+
+    .about-right {
+      padding: 100px 60px;
+      background: var(--bg2);
+    }
+
+    .about-body {
+      font-size: 15px;
+      line-height: 2.1;
+      color: #aaa;
+      margin-bottom: 24px;
+    }
+
+    .about-body strong {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .log-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .log-block::before {
+      content: 'system.log';
+      position: absolute;
+      top: 0;
+      left: 16px;
+      transform: translateY(-50%);
+      background: var(--bg2);
+      padding: 0 8px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--dim);
+    }
+
+    .log-line {
+      font-size: 13px;
+      line-height: 2;
+      color: var(--dim);
+      display: flex;
+      gap: 12px;
+    }
+
+    .log-line .ts {
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .log-line .msg {
+      color: #999;
+    }
+
+    .log-line .msg strong {
+      color: var(--white);
+    }
+
+    .stack-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .stack-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stack-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .stack-table td {
+      padding: 18px 0;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .stack-table td:first-child {
+      color: var(--white);
+      width: 40%;
+    }
+
+    .stack-table td:nth-child(2) {
+      width: 40%;
+      padding: 0 16px;
+    }
+
+    .stack-table td:last-child {
+      text-align: right;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #bbb;
+    }
+
+    .bar {
+      height: 2px;
+      background: var(--dim2);
+      position: relative;
+    }
+
+    .bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: var(--pct);
+      background: var(--yellow);
+    }
+
+    /* WORK */
+    .project-item {
+      border-top: 1px solid var(--border);
+      padding: 44px 60px;
+      display: grid;
+      grid-template-columns: 48px 1fr 200px;
+      gap: 32px;
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      background: var(--yellow-dim);
+      transition: width 0.4s ease;
+    }
+
+    .project-item:hover::before {
+      width: 100%;
+    }
+
+    .proj-num {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      padding-top: 4px;
+    }
+
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .proj-desc {
+      font-size: 14px;
+      line-height: 2;
+      color: #888;
+      max-width: 540px;
+      margin-bottom: 20px;
+    }
+
+    .proj-desc:hover {
+      color: rgb(248, 163, 58);
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .proj-tag {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--dim);
+      border: 1px solid var(--dim2);
+      padding: 3px 10px;
+    }
+
+    .proj-side {
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .proj-status {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .proj-status::before {
+      content: '● ';
+    }
+
+    .proj-year {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--dim);
+    }
+
+    /* PROCESS */
+    #process {
+      background: var(--bg2);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .process-card {
+      background: var(--bg2);
+      padding: 48px 40px;
+    }
+
+    .process-card-num {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: var(--yellow);
+      margin-bottom: 32px;
+    }
+
+    .process-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .process-card p {
+      font-size: 14px;
+      line-height: 2;
+      color: #777;
+    }
+
+    /* CONTACT */
+    #contact {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 0.92;
+      margin-bottom: 56px;
+    }
+
+    .contact-heading span {
+      color: var(--yellow);
+    }
+
+    .contact-grid {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      max-width: 600px;
+    }
+
+    .contact-link {
+      flex: 1;
+      padding: 20px 28px;
+      text-decoration: none;
+      color: var(--dim);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-right: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-link:last-child {
+      border-right: none;
+    }
+
+    .contact-link:hover {
+      color: var(--yellow);
+      background: var(--yellow-dim);
+    }
+
+    footer {
+      padding: 24px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    footer span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--dim);
+    }
+
+    .easter-trigger {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .easter-trigger:hover {
+      color: var(--yellow);
+    }
+
+    /* ── MAC TERMINAL OVERLAY ── */
+    #terminalOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #terminalOverlay.active {
+      display: flex;
+    }
+
+    #terminalWindow {
+      width: min(860px, 92vw);
+      height: min(560px, 80vh);
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: termIn 0.25s ease;
+    }
+
+    @keyframes termIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .term-titlebar {
+      background: #2d2d2d;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+
+    .mac-btn {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0;
+    }
+
+    .mac-btn::after {
+      content: '';
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .mac-btn-group:hover .mac-btn::after {
+      opacity: 1;
+    }
+
+    .mac-btn.red {
+      background: #ff5f57;
+    }
+
+    .mac-btn.red::after {
+      content: '×';
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1;
+    }
+
+    .mac-btn.yellow {
+      background: #febc2e;
+    }
+
+    .mac-btn.yellow::after {
+      content: '−';
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    .mac-btn.green {
+      background: #28c840;
+    }
+
+    .mac-btn.green::after {
+      content: '⤢';
+      font-size: 8px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1;
+    }
+
+    .term-title-text {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: rgba(187, 248, 178, 0.5);
+      margin-left: 4px;
+    }
+
+    .term-title-status {
+      margin-left: auto;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--green);
+    }
+
+    .term-title-status.thinking {
+      color: var(--yellow);
+      animation: blink 1s step-end infinite;
+    }
+
+    .term-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .term-body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .term-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .term-body::-webkit-scrollbar-thumb {
+      background: var(--dim2);
+      border-radius: 2px;
+    }
+
+    .term-line {
+      font-size: 13px;
+      line-height: 1.9;
+      margin-bottom: 2px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .term-line.system {
+      color: var(--dim2);
+    }
+
+    .term-line.prompt-line {
+      color: var(--green);
+    }
+
+    .term-line.user-input {
+      color: var(--white);
+    }
+
+    .term-line.response {
+      color: rgba(245, 168, 0, 0.9);
+    }
+
+    .term-line.response.error {
+      color: #ff5f57;
+    }
+
+    .term-line.empty {
+      height: 10px;
+    }
+
+    .term-input-row {
+      padding: 14px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      background: #161616;
+    }
+
+    .term-prompt-label {
+      color: var(--green);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    #termInput {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--white);
+      caret-color: var(--yellow);
+    }
+
+    #termInput::placeholder {
+      color: var(--dim2);
+    }
+
+    .term-send-hint {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--dim2);
+      flex-shrink: 0;
+    }
+
+    /* MINIMIZED BAR */
+    #termMinBar {
+      display: none;
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 250;
+      background: #2d2d2d;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--dim);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #termMinBar:hover {
+      color: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    #termMinBar.visible {
+      display: flex;
+    }
+
+    /* EASTER EGG */
+    #easterEgg {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 500;
+      width: 320px;
+    }
+
+    .mac-popup {
+      background: #1e1e1e;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      font-family: 'Space Mono', monospace;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .mac-popup-title {
+      background: #2d2d2d;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 12px 14px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: move;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      letter-spacing: 1px;
+    }
+
+    .mac-popup-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mac-popup-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .mpd-r {
+      background: #ff5f57;
+    }
+
+    .mpd-y {
+      background: #febc2e;
+    }
+
+    .mpd-g {
+      background: #28c840;
+    }
+
+    .mac-popup-body {
+      padding: 20px;
+      font-size: 12px;
+      line-height: 2;
+      color: rgba(245, 168, 0, 0.85);
+      cursor: move;
+    }
+
+    .mac-popup-body p {
+      margin-bottom: 6px;
+    }
+
+    .mac-popup-footer {
+      padding: 12px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .mac-popup-close-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.5);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mac-popup-close-btn:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      #hero {
+        padding: 120px 24px 80px;
+      }
+
+      .win-ghost {
+        display: none;
+      }
+
+      .hero-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section {
+        padding: 80px 24px;
+      }
+
+      #about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-left {
+        padding: 80px 24px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .about-right {
+        padding: 80px 24px;
+      }
+
+      .project-item {
+        grid-template-columns: 40px 1fr;
+        padding: 44px 24px;
+      }
+
+      .proj-side {
+        display: none;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 20px 24px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #terminalWindow {
+        height: 90vh;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-  <a href="#" class="nav-logo">CH</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <nav>
+    <a href="#" class="nav-logo">Chenghong Meng</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<div class="status-bar">
-  <div class="status-item"><span class="status-dot"></span>SYSTEM_ONLINE</div>
-  <span class="status-sep">|</span>
-  <div class="status-item">STACK: Laravel · React · LLM</div>
-  <span class="status-sep">|</span>
-  <div class="status-item">STATUS: Available</div>
-  <span class="status-sep">|</span>
-  <div class="status-item" id="clock">--:--:--</div>
-</div>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="win-ghost" id="winGhost">
-    <div class="win-ghost-window" style="--rot:-3deg">
-      <div class="win-ghost-title">
-        <div class="win-ghost-dots"><div class="win-ghost-dot wgd-r"></div><div class="win-ghost-dot wgd-y"></div><div class="win-ghost-dot wgd-g"></div></div>
-        <span>SYSTEM_MANIFEST</span>
-      </div>
-      <div class="win-ghost-body">Available_For_Deep_Technology_Fusion</div>
+  <div class="status-bar">
+    <div class="status-item"><span class="status-dot"></span>SYSTEM_ONLINE</div>
+    <span class="status-sep">|</span>
+    <div class="status-item">STACK: Laravel · React · MySql · LLM · Python</div>
+    <span class="status-sep">|</span>
+    <div class="status-item">STATUS:
+      <span class="meta-value green" style="animation: blink 2s step-end infinite;">Available</span>
     </div>
-    <div class="win-ghost-window" style="--rot:2deg;margin-left:40px">
-      <div class="win-ghost-title">
-        <div class="win-ghost-dots"><div class="win-ghost-dot wgd-r"></div><div class="win-ghost-dot wgd-y"></div><div class="win-ghost-dot wgd-g"></div></div>
-        <span>LLM_ALERT</span>
-      </div>
-      <div class="win-ghost-body">LLAMA_3_PERSONALITY_SYNC_COMPLETE</div>
-    </div>
-    <div class="win-ghost-window" style="--rot:-1deg;margin-left:20px">
-      <div class="win-ghost-title">
-        <div class="win-ghost-dots"><div class="win-ghost-dot wgd-r"></div><div class="win-ghost-dot wgd-y"></div><div class="win-ghost-dot wgd-g"></div></div>
-        <span>CORE_PROCESS.EXE</span>
-      </div>
-      <div class="win-ghost-body">ASK_ME_ANYTHING_TERMINAL_READY</div>
-    </div>
+    <span class="status-sep">|</span>
+    <div class="status-item" id="clock">--:--:--</div>
   </div>
 
-  <!-- MAC WINDOW: the real interactive one -->
-  <div style="position:absolute;top:80px;right:60px;width:360px;opacity:0;animation:fadeUp 0.8s ease 1s forwards;" id="macHeroWindow">
-    <div id="macHeroInner" style="background:#1e1e1e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.7);cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;">
-      <div class="mac-btn-group" style="background:#2d2d2d;padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
-        <button class="mac-btn red" id="heroClose"></button>
-        <button class="mac-btn yellow" id="heroMinimize"></button>
-        <button class="mac-btn green" id="heroExpand"></button>
-        <span style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-left:6px;">ch_terminal.sh</span>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="win-ghost" id="winGhost">
+      <div class="win-ghost-window" style="--rot:-3deg">
+        <div class="win-ghost-title">
+          <div class="win-ghost-dots">
+            <div class="win-ghost-dot wgd-r"></div>
+            <div class="win-ghost-dot wgd-y"></div>
+            <div class="win-ghost-dot wgd-g"></div>
+          </div>
+          <span>SYSTEM_MANIFEST</span>
+        </div>
+        <div class="win-ghost-body">Available_For_Deep_Technology_Fusion</div>
       </div>
-      <div id="macHeroBody" style="padding:16px 18px;font-size:12px;line-height:2;color:rgba(245,168,0,0.8);">
-        <div style="color:var(--dim);margin-bottom:4px;font-size:11px;">// click anywhere to open terminal</div>
-        <div>ASK_ME_ANYTHING_READY</div>
-        <div>CONTEXT: projects · stack · experience</div>
-        <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
-          <span id="heroCursor" style="display:inline-block;width:8px;height:14px;background:var(--yellow);animation:blink 1s step-end infinite;"></span>
-          <span style="color:rgba(255,255,255,0.25);font-size:10px;letter-spacing:1px;">Powered by Claude API</span>
+      <div class="win-ghost-window" style="--rot:2deg;margin-left:40px">
+        <div class="win-ghost-title">
+          <div class="win-ghost-dots">
+            <div class="win-ghost-dot wgd-r"></div>
+            <div class="win-ghost-dot wgd-y"></div>
+            <div class="win-ghost-dot wgd-g"></div>
+          </div>
+          <span>LLM_ALERT</span>
+        </div>
+        <div class="win-ghost-body">LLAMA_3_PERSONALITY_SYNC_COMPLETE</div>
+      </div>
+      <div class="win-ghost-window" style="--rot:-1deg;margin-left:20px">
+        <div class="win-ghost-title">
+          <div class="win-ghost-dots">
+            <div class="win-ghost-dot wgd-r"></div>
+            <div class="win-ghost-dot wgd-y"></div>
+            <div class="win-ghost-dot wgd-g"></div>
+          </div>
+          <span>CORE_PROCESS.EXE</span>
+        </div>
+        <div class="win-ghost-body">ASK_ME_ANYTHING_TERMINAL_READY</div>
+      </div>
+    </div>
+
+    <!-- MAC WINDOW: the real interactive one -->
+    <div style="position:absolute;top:80px;right:60px;width:360px;opacity:0;animation:fadeUp 0.8s ease 1s forwards;"
+      id="macHeroWindow">
+      <div id="macHeroInner"
+        style="background:#1e1e1e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.7);cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;">
+        <div class="mac-btn-group"
+          style="background:#2d2d2d;padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <button class="mac-btn red" id="heroClose"></button>
+          <button class="mac-btn yellow" id="heroMinimize"></button>
+          <button class="mac-btn green" id="heroExpand"></button>
+          <span
+            style="font-size:11px;letter-spacing:2px;color:rgba(255, 255, 255, 0.873);margin-left:6px;">chenghong_terminal.sh</span>
+        </div>
+        <div id="macHeroBody" style="padding:16px 18px;font-size:12px;line-height:2;color:rgba(245,168,0,0.8);">
+          <div style="color:var(--dim);margin-bottom:4px;font-size:11px;">// click anywhere to open terminal</div>
+          <div>ASK_ME_ANYTHING_READY</div>
+          <div>CONTEXT: projects · stack · experience</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
+            <span id="heroCursor"
+              style="display:inline-block;width:8px;height:14px;background:var(--yellow);animation:blink 1s step-end infinite;"></span>
+            <span style="color:rgba(255,255,255,0.25);font-size:10px;letter-spacing:1px;">Powered by Claude API</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="hero-terminal-header">
-    <div class="terminal-dot td-red"></div>
-    <div class="terminal-dot td-yellow"></div>
-    <div class="terminal-dot td-green"></div>
-    <span class="terminal-title">ch@portfolio ~ bash</span>
-  </div>
-  <p class="hero-prompt"><span>~/portfolio</span> $ whoami</p>
-  <h1 class="hero-title">Full-Stack<br><span class="dim-word">Developer</span><br><span class="hl">who ships.</span></h1>
-  <div class="hero-meta">
-    <div class="meta-cell"><div class="meta-label">Role</div><div class="meta-value">Full-Stack Dev</div></div>
-    <div class="meta-cell"><div class="meta-label">Stack</div><div class="meta-value">Laravel · React</div></div>
-    <div class="meta-cell"><div class="meta-label">Focus</div><div class="meta-value yellow">AI · LLM Tooling</div></div>
-    <div class="meta-cell"><div class="meta-label">Status</div><div class="meta-value yellow">● Available</div></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-left reveal">
-    <div class="section-header">
-      <span class="section-num">01</span><span class="section-line"></span><span class="section-label">About</span>
+    <div class="hero-terminal-header">
+      <div class="terminal-dot td-red"></div>
+      <div class="terminal-dot td-yellow"></div>
+      <div class="terminal-dot td-green"></div>
+      <span class="terminal-title">chenghong@portfolio ~ bash</span>
     </div>
-    <h2 class="section-heading">Who<br>I am.</h2>
-    <p class="about-body">Full-stack developer working across <strong>East and West Coast</strong> time zones. I build things that run in production — not demos, not prototypes.</p>
-    <p class="about-body">Currently deep into <strong>AI tooling</strong>: local LLM fine-tuning pipelines, browser extensions, and the intersection where backend systems meet language models.</p>
-    <div class="log-block">
-      <div class="log-line"><span class="ts">2024-01</span><span class="msg">init <strong>LLM training pipeline</strong> · MLX + Llama 3</span></div>
-      <div class="log-line"><span class="ts">2024-06</span><span class="msg">shipped <strong>browser extension</strong> · 4 platforms</span></div>
-      <div class="log-line"><span class="ts">2024-11</span><span class="msg">debug timezone logic · production fix</span></div>
-      <div class="log-line"><span class="ts">2025-03</span><span class="msg">status: <strong>building</strong> · open to opportunities</span></div>
-    </div>
-  </div>
-  <div class="about-right reveal">
-    <div class="section-header">
-      <span class="section-num" style="visibility:hidden">00</span><span class="section-line"></span><span class="section-label">Stack</span>
-    </div>
-    <h2 class="section-heading">Tech<br>Stack.</h2>
-    <table class="stack-table">
-      <tr><td>Laravel / PHP</td><td><div class="bar" style="--pct:90%"></div></td><td>Primary</td></tr>
-      <tr><td>React</td><td><div class="bar" style="--pct:80%"></div></td><td>Primary</td></tr>
-      <tr><td>MySQL</td><td><div class="bar" style="--pct:85%"></div></td><td>Primary</td></tr>
-      <tr><td>LLM / MLX</td><td><div class="bar" style="--pct:70%"></div></td><td>Growing</td></tr>
-      <tr><td>Node / JS</td><td><div class="bar" style="--pct:75%"></div></td><td>Fluent</td></tr>
-      <tr><td>Python</td><td><div class="bar" style="--pct:65%"></div></td><td>Fluent</td></tr>
-    </table>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work" class="section">
-  <div class="section-header reveal"><span class="section-num">02</span><span class="section-line"></span><span class="section-label">Work</span></div>
-  <h2 class="section-heading reveal">Selected<br>Projects.</h2>
-  <div class="project-item reveal">
-    <span class="proj-num">01</span>
-    <div>
-      <h3 class="proj-title">Local LLM Training Pipeline</h3>
-      <p class="proj-desc">End-to-end pipeline: export conversation data from multiple AI platforms, score, filter, clean, desensitize, convert, and fine-tune. Architecture insight: scoring before desensitization prevents placeholder leakage. Working adapter: local_claude_final2.</p>
-      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">MLX</span><span class="proj-tag">Llama 3 8B</span><span class="proj-tag">Claude API</span><span class="proj-tag">Fine-tuning</span></div>
-    </div>
-    <div class="proj-side"><div class="proj-status">Deployed</div><div class="proj-year">2024</div></div>
-  </div>
-  <div class="project-item reveal">
-    <span class="proj-num">02</span>
-    <div>
-      <h3 class="proj-title">AI Chat Workbench Extension</h3>
-      <p class="proj-desc">Browser extension injecting branch-marking UI into Claude, Gemini, ChatGPT, and Grok simultaneously. Platform-specific adapters handle DOM differences across four distinct interfaces. Zero dependencies.</p>
-      <div class="proj-tags"><span class="proj-tag">Browser Extension</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Multi-platform</span><span class="proj-tag">DOM</span></div>
-    </div>
-    <div class="proj-side"><div class="proj-status">Active</div><div class="proj-year">2024</div></div>
-  </div>
-  <div class="project-item reveal">
-    <span class="proj-num">03</span>
-    <div>
-      <h3 class="proj-title">Queue-based Reminder System</h3>
-      <p class="proj-desc">Laravel queue architecture with timezone-aware scheduling. Debugged UTC date-shifting bugs in JavaScript ISO string interpretation, MySQL charset/collation conflicts, and Eloquent belongsToMany edge cases in production.</p>
-      <div class="proj-tags"><span class="proj-tag">Laravel</span><span class="proj-tag">MySQL</span><span class="proj-tag">Queue Workers</span><span class="proj-tag">Timezone Logic</span></div>
-    </div>
-    <div class="proj-side"><div class="proj-status">Production</div><div class="proj-year">2024</div></div>
-  </div>
-  <div class="project-item reveal">
-    <span class="proj-num">04</span>
-    <div>
-      <h3 class="proj-title">Multi-model Scoring Pipeline</h3>
-      <p class="proj-desc">Two-stage classification: Claude API (Haiku) for topic judgment, GPT for format summarization. Each model used where it outperforms the other. Designed to run before data desensitization to prevent placeholder contamination in training sets.</p>
-      <div class="proj-tags"><span class="proj-tag">Claude API</span><span class="proj-tag">GPT</span><span class="proj-tag">Pipeline Design</span><span class="proj-tag">Python</span></div>
-    </div>
-    <div class="proj-side"><div class="proj-status">Active</div><div class="proj-year">2025</div></div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process" class="section">
-  <div class="section-header reveal"><span class="section-num">03</span><span class="section-line"></span><span class="section-label">How I work</span></div>
-  <div class="process-grid">
-    <div class="process-card reveal"><div class="process-card-num">01 // scope</div><h3>Scope first.</h3><p>Break tasks by complexity before touching code. Know the blast radius before you dig.</p></div>
-    <div class="process-card reveal"><div class="process-card-num">02 // iterate</div><h3>Iterate tight.</h3><p>File by file. Line by line. Fresh context when things go in circles. No spaghetti.</p></div>
-    <div class="process-card reveal"><div class="process-card-num">03 // ship</div><h3>Ship, then refine.</h3><p>Production first, polish second. Things that run matter more than things that look good in dev.</p></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <div class="section-header reveal"><span class="section-num">04</span><span class="section-line"></span><span class="section-label">Contact</span></div>
-  <h2 class="contact-heading reveal">Let's build<br><span>something.</span></h2>
-  <div class="contact-grid reveal">
-    <a href="mailto:hello@example.com" class="contact-link">✉ Email</a>
-    <a href="#" class="contact-link">⌥ GitHub</a>
-    <a href="#" class="contact-link">→ LinkedIn</a>
-  </div>
-</section>
-
-<footer>
-  <span>Ch — Full-Stack Developer</span>
-  <span class="easter-trigger" id="easterTrigger">© 2025</span>
-</footer>
-
-<!-- TERMINAL OVERLAY -->
-<div id="terminalOverlay">
-  <div id="terminalWindow">
-    <div class="term-titlebar">
-      <div class="mac-btn-group" style="display:flex;gap:7px;align-items:center;">
-        <button class="mac-btn red" id="termClose" title="Close"></button>
-        <button class="mac-btn yellow" id="termMinimize" title="Minimize"></button>
-        <button class="mac-btn green" id="termMax" title="Maximize"></button>
+    <p class="hero-prompt"><span>~/portfolio</span> $ whoami</p>
+    <h1 class="hero-title">Full-Stack<br><span class="dim-word">Developer</span><br><span class="hl">who ships.</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="meta-cell">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Full-Stack Dev</div>
       </div>
-      <span class="term-title-text">ch_terminal.sh — ask me anything</span>
-      <span class="term-title-status" id="termStatus">READY</span>
+      <div class="meta-cell">
+        <div class="meta-label">Stack</div>
+        <div class="meta-value">Laravel · React</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value yellow">AI · LLM Tooling</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Status</div>
+        <div class="meta-value green">● Available</div>
+      </div>
     </div>
-    <div class="term-body" id="termBody"></div>
-    <div class="term-input-row">
-      <span class="term-prompt-label">~/portfolio $</span>
-      <input type="text" id="termInput" placeholder="ask me anything..." autocomplete="off" spellcheck="false">
-      <span class="term-send-hint">↵ send</span>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left reveal">
+      <div class="section-header">
+        <span class="section-num">01</span><span class="section-line"></span><span class="section-label">About</span>
+      </div>
+      <h2 class="section-heading">Who<br>I am.</h2>
+      <p class="about-body">Full-stack engineer with a background in Biochemistry and 5+ years building production
+        systems, specializing in LLM orchestration and compliance-grade workflows — seeking to apply domain knowledge in
+        medical AI, drug discovery platforms, or healthcare management systems.</p>
+      <p class="about-body">Currently deep into <strong>AI tooling</strong>: local LLM fine-tuning pipelines, browser
+        extensions, and the intersection where backend systems meet language models.</p>
+      <div class="log-block">
+        <div class="log-line"><span class="ts">2026-04</span><span class="msg">status: <strong>building</strong> · open
+            to opportunities</span></div>
+        <div class="log-line"><span class="ts">2026-03</span><span class="msg">continuing <strong>LLM training
+              pipeline</strong> · MLX + Llama 3</span></div>
+        <div class="log-line"><span class="ts">2026-02</span><span class="msg">published <strong>chrome
+              extension</strong> · 4 platforms</span></div>
+        <div class="log-line"><span class="ts">2026-01</span><span class="msg">debug timezone logic · production
+            fix</span></div>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="section-header">
+        <span class="section-num" style="visibility:hidden">00</span><span class="section-line"></span><span
+          class="section-label">Stack</span>
+      </div>
+      <h2 class="section-heading">Tech<br>Stack.</h2>
+      <table class="stack-table">
+        <tr>
+          <td>Laravel / PHP</td>
+          <td>
+            <div class="bar" style="--pct:90%"></div>
+          </td>
+          <td>Primary</td>
+        </tr>
+        <tr>
+          <td>React</td>
+          <td>
+            <div class="bar" style="--pct:80%"></div>
+          </td>
+          <td>Primary</td>
+        </tr>
+        <tr>
+          <td>MySQL</td>
+          <td>
+            <div class="bar" style="--pct:85%"></div>
+          </td>
+          <td>Primary</td>
+        </tr>
+        <tr>
+          <td>LLM / MLX</td>
+          <td>
+            <div class="bar" style="--pct:70%"></div>
+          </td>
+          <td>Growing</td>
+        </tr>
+        <tr>
+          <td>Node / JS</td>
+          <td>
+            <div class="bar" style="--pct:75%"></div>
+          </td>
+          <td>Fluent</td>
+        </tr>
+        <tr>
+          <td>Python</td>
+          <td>
+            <div class="bar" style="--pct:65%"></div>
+          </td>
+          <td>Fluent</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="section">
+    <div class="section-header reveal"><span class="section-num">02</span><span class="section-line"></span><span
+        class="section-label">Work</span></div>
+    <h2 class="section-heading reveal">Selected<br>Projects.</h2>
+    <div class="project-item reveal">
+      <span class="proj-num">01</span>
+      <div>
+        <h3 class="proj-title">AI-assistant QPR (Quarterly Progress Report) System Upgrade</h3>
+        <p class="proj-desc">Designed an AI Orchestration Layer managing the full LLM
+          workflow — data preparation, prompt construction, model routing (local vs API), output parsing, and validation
+          guardrails ,versioning and with human-in-the-loop — projecting ~33% reduction in clinician documentation time
+          per reporting cycle.</p>
+        <div class="proj-tags"><span class="proj-tag">LLM</span><span class="proj-tag">AI Orchestration</span><span
+            class="proj-tag">Post-processing</span><span class="proj-tag">Versioning</span><span
+            class="proj-tag">Human-in-the-Loop</span></div>
+      </div>
+      <div class="proj-side">
+        <div class="proj-status">Architectued</div>
+        <div class="proj-year">2026</div>
+      </div>
+    </div>
+    <div class="project-item reveal">
+      <span class="proj-num">02</span>
+      <div>
+        <h3 class="proj-title">Local LLM Training Pipeline</h3>
+        <p class="proj-desc">End-to-end pipeline: export conversation data from multiple AI platforms, score, filter,
+          clean, desensitize, convert, and fine-tune. Architecture insight: scoring before desensitization prevents
+          placeholder leakage. Working adapter: local_claude_final2.</p>
+        <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">MLX</span><span
+            class="proj-tag">Llama 3 8B</span><span class="proj-tag">Claude API</span><span
+            class="proj-tag">Fine-tuning</span></div>
+      </div>
+      <div class="proj-side">
+        <div class="proj-status">Working on</div>
+        <div class="proj-year">2026</div>
+      </div>
+    </div>
+    <div class="project-item reveal">
+      <span class="proj-num">03</span>
+      <div>
+        <h3 class="proj-title">AI Chat Workbench Extension</h3>
+        <p class="proj-desc">Browser extension injecting branch-marking UI into Claude, Gemini, ChatGPT, and Grok
+          simultaneously, enabling precise branch marking, collapsing, and navigation across hundreds of messages.
+          Platform-specific adapters handle DOM differences across four distinct interfaces. </p>
+        <div class="proj-tags"><span class="proj-tag">Chrome Extension</span><span
+            class="proj-tag">JavaScript</span><span class="proj-tag">Multi-platform</span><span
+            class="proj-tag">DOM</span></div>
+      </div>
+      <div class="proj-side">
+        <div class="proj-status">Published</div>
+        <div class="proj-year">2026</div>
+      </div>
+    </div>
+
+    <div class="project-item reveal">
+      <span class="proj-num">04</span>
+      <div>
+        <h3 class="proj-title">Multi-model Scoring Pipeline</h3>
+        <p class="proj-desc">Two-stage classification: Claude API (Haiku) for topic judgment, GPT for format
+          summarization. Each model used where it outperforms the other. Designed to run before data desensitization to
+          prevent placeholder contamination in training sets.</p>
+        <div class="proj-tags"><span class="proj-tag">Claude API</span><span class="proj-tag">GPT</span><span
+            class="proj-tag">Pipeline Design</span><span class="proj-tag">Python</span></div>
+      </div>
+      <div class="proj-side">
+        <div class="proj-status">Active</div>
+        <div class="proj-year">2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="section">
+    <div class="section-header reveal"><span class="section-num">03</span><span class="section-line"></span><span
+        class="section-label">How I work</span></div>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <div class="process-card-num">01 // scope</div>
+        <h3 style="color: #83a5c7;">Scope first.</h3>
+        <p>Break tasks by complexity before touching code. Know the blast radius before you dig.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-card-num">02 // iterate</div>
+        <h3 style="color: #83a5c7;">Iterate tight.</h3>
+        <p>File by file. Line by line. Fresh context when things go in circles. No spaghetti.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-card-num">03 // ship</div>
+        <h3 style="color: #83a5c7;">Ship, then refine.</h3>
+        <p>Production first, polish second. Things that run matter more than things that look good in dev.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="section-header reveal"><span class="section-num">04</span><span class="section-line"></span><span
+        class="section-label">Contact</span></div>
+    <h2 class="contact-heading reveal">Let's build<br><span>something.</span></h2>
+    <div class="contact-grid reveal">
+      <a href="#" class="contact-link">✉ mengchh01@gmail.com</a>
+      <a href="https://github.com/chenghongm" class="contact-link">⌥ GitHub</a>
+      <a href="#" class="contact-link">→ LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Chenghong Meng — Full-Stack Developer</span>
+    <div>
+
+      <div class="easter-trigger" id="easterTrigger">
+        <div>
+          <div
+            style="position: relative; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;">
+            <div>
+              <div
+                style="width: 20px; height: 20px; border-radius: 100%; background: var(--c-assCorButBac); box-shadow: var(--c-shaOutLg); overflow: hidden; user-select: none;">
+                <div
+                  style="width: 20px; height: 20px; border-radius: 100%; background: var(--c-assCorButBac); overflow: hidden; transform: scaleX(var(--direction, 1));">
+                  <img src="/chm1-portfolio/asset/eyes.gif" alt="Notion AI face"
+                    style="height: 20px; width: 20px; user-select: none; -webkit-user-drag: none;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 2026
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- TERMINAL OVERLAY -->
+  <div id="terminalOverlay">
+    <div id="terminalWindow">
+      <div class="term-titlebar">
+        <div class="mac-btn-group" style="display:flex;gap:7px;align-items:center;">
+          <button class="mac-btn red" id="termClose" title="Close"></button>
+          <button class="mac-btn yellow" id="termMinimize" title="Minimize"></button>
+          <button class="mac-btn green" id="termMax" title="Maximize"></button>
+        </div>
+        <span class="term-title-text">chenghong_terminal.sh — ASK me anything</span>
+        <span class="term-title-status" id="termStatus">READY</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+      <div class="term-input-row">
+        <span class="term-prompt-label">~/portfolio $</span>
+        <input type="text" id="termInput" placeholder="ask me anything..." autocomplete="off" spellcheck="false">
+        <span class="term-send-hint">↵ send</span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- MINIMIZED BAR -->
-<div id="termMinBar">
-  <span>▣</span><span>ch_terminal.sh</span><span style="color:var(--yellow)">▲ restore</span>
-</div>
+  <!-- MINIMIZED BAR -->
+  <div id="termMinBar">
+    <span>▣</span><span>ch_terminal.sh</span><span style="color:var(--yellow)">▲ restore</span>
+  </div>
 
-<!-- EASTER EGG -->
-<div id="easterEgg">
-  <div class="mac-popup" id="macPopup">
-    <div class="mac-popup-title" id="macPopupTitle">
-      <div class="mac-popup-dots"><span class="mpd-r"></span><span class="mpd-y"></span><span class="mpd-g"></span></div>
-      <span>SYSTEM_ALERT.EXE</span>
-    </div>
-    <div class="mac-popup-body">
-      <p><strong>CHENGHONG_MENG_UNSTOPPABLE_FOUNDATION</strong></p>
-      <p>LLAMA_3_PERSONALITY_SYNC_COMPLETE</p>
-      <p>TARGET_LOCKED: NEXT_OPPORTUNITY</p>
-      <p style="margin-top:16px;color:rgba(255,255,255,0.35);font-size:10px;letter-spacing:2px;">You found it. Now hire me.</p>
-    </div>
-    <div class="mac-popup-footer">
-      <button class="mac-popup-close-btn" id="easterClose">DISMISS</button>
+  <!-- EASTER EGG -->
+  <div id="easterEgg">
+    <div class="mac-popup" id="macPopup">
+      <div class="mac-popup-title" id="macPopupTitle">
+        <div class="mac-popup-dots"><span class="mpd-r"></span><span class="mpd-y"></span><span class="mpd-g"></span>
+        </div>
+        <span>SYSTEM_ALERT.EXE</span>
+      </div>
+      <div class="mac-popup-body">
+        <p><strong>CHENGHONG_MENG_UNSTOPPABLE_FOUNDATION</strong></p>
+        <p>LLAMA_3_PERSONALITY_SYNC_COMPLETE</p>
+        <p>TARGET_LOCKED: NEXT_OPPORTUNITY</p>
+        <p style="margin-top:16px;color:rgba(255,255,255,0.35);font-size:10px;letter-spacing:2px;">You found it. Now
+          hire me.</p>
+      </div>
+      <div class="mac-popup-footer">
+        <button class="mac-popup-close-btn" id="easterClose">DISMISS</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-// ── SYSTEM PROMPT ──
-const SYSTEM_PROMPT = `You are Ch's portfolio assistant — a terminal interface on Ch's personal developer portfolio website. You answer questions about Ch concisely and in character: direct, technical, no fluff.
+  <script>
+    // ── SYSTEM PROMPT ──
+    const SYSTEM_PROMPT = `You are Chenghong's portfolio assistant — a terminal interface on Chenghong's personal developer portfolio website. You answer questions about Chenghong concisely and in character: direct, technical, no fluff.
 
-## Who is Ch
-Ch is a full-stack developer with deep experience in Laravel/PHP backend systems and React frontend. Works across East and West Coast time zones. Currently focused on AI tooling and LLM engineering.
+## Who is Chenghong
+Chenghong is a full-stack developer with deep experience in Laravel/PHP backend systems and React frontend. Works across East and West Coast time zones. Currently focused on AI tooling and LLM engineering.
 
 ## Technical Stack
 - Laravel / PHP: Primary stack. Production-grade APIs, queue workers, Eloquent ORM, MySQL.
@@ -586,210 +1558,211 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
 - No markdown, no bullet points in responses — plain text only
 - If asked "what can I ask", list a few example topics`;
 
-// ── CLOCK ──
-function updateClock() {
-  document.getElementById('clock').textContent = new Date().toTimeString().slice(0,8);
-}
-updateClock(); setInterval(updateClock, 1000);
+    // ── CLOCK ──
+    function updateClock() {
+      document.getElementById('clock').textContent = new Date().toTimeString().slice(0, 8);
+    }
+    updateClock(); setInterval(updateClock, 1000);
 
-// ── REVEAL ──
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-reveals.forEach((el) => {
-  const siblings = [...el.parentElement.querySelectorAll('.reveal')];
-  el.style.transitionDelay = `${siblings.indexOf(el) * 0.07}s`;
-  io.observe(el);
-});
-
-// ── PARALLAX ──
-const winGhost = document.getElementById('winGhost');
-window.addEventListener('scroll', () => {
-  if (winGhost) winGhost.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.12}px))`;
-}, { passive: true });
-
-// ── TERMINAL STATE ──
-const overlay = document.getElementById('terminalOverlay');
-const termBody = document.getElementById('termBody');
-const termInput = document.getElementById('termInput');
-const termStatus = document.getElementById('termStatus');
-const minBar = document.getElementById('termMinBar');
-let conversationHistory = [];
-let isMinimized = false;
-
-function openTerminal() {
-  overlay.classList.add('active');
-  isMinimized = false;
-  minBar.classList.remove('visible');
-  if (termBody.children.length === 0) {
-    printLine('system', '// Ch\'s portfolio terminal — powered by Claude API');
-    printLine('system', '// type your question and press Enter');
-    printLine('empty');
-    printLine('prompt-line', '~/portfolio $ _');
-  }
-  setTimeout(() => termInput.focus(), 100);
-}
-
-function closeTerminal() {
-  overlay.classList.remove('active');
-  minBar.classList.remove('visible');
-  isMinimized = false;
-}
-
-function minimizeTerminal() {
-  overlay.classList.remove('active');
-  minBar.classList.add('visible');
-  isMinimized = true;
-}
-
-function printLine(type, text) {
-  const div = document.createElement('div');
-  div.className = `term-line ${type}`;
-  div.textContent = text;
-  termBody.appendChild(div);
-  termBody.scrollTop = termBody.scrollHeight;
-  return div;
-}
-
-async function sendMessage(input) {
-  const userText = input.trim();
-  if (!userText) return;
-
-  // remove the blinking cursor line
-  const lastLine = termBody.lastElementChild;
-  if (lastLine && lastLine.textContent.endsWith('_')) lastLine.remove();
-
-  printLine('prompt-line', `~/portfolio $ ${userText}`);
-  printLine('empty');
-
-  conversationHistory.push({ role: 'user', content: userText });
-
-  termStatus.textContent = 'THINKING...';
-  termStatus.className = 'term-title-status thinking';
-  termInput.disabled = true;
-
-  const thinkingEl = printLine('system', '...');
-
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system: SYSTEM_PROMPT,
-        messages: conversationHistory
-      })
+    // ── REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach((el) => {
+      const siblings = [...el.parentElement.querySelectorAll('.reveal')];
+      el.style.transitionDelay = `${siblings.indexOf(el) * 0.07}s`;
+      io.observe(el);
     });
 
-    const data = await response.json();
-    thinkingEl.remove();
+    // ── PARALLAX ──
+    const winGhost = document.getElementById('winGhost');
+    window.addEventListener('scroll', () => {
+      if (winGhost) winGhost.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.12}px))`;
+    }, { passive: true });
 
-    if (data.content && data.content[0]) {
-      const reply = data.content[0].text;
-      conversationHistory.push({ role: 'assistant', content: reply });
+    // ── TERMINAL STATE ──
+    const overlay = document.getElementById('terminalOverlay');
+    const termBody = document.getElementById('termBody');
+    const termInput = document.getElementById('termInput');
+    const termStatus = document.getElementById('termStatus');
+    const minBar = document.getElementById('termMinBar');
+    let conversationHistory = [];
+    let isMinimized = false;
 
-      // type out the response
-      const replyEl = printLine('response', '');
-      let i = 0;
-      const typeInterval = setInterval(() => {
-        replyEl.textContent += reply[i];
-        termBody.scrollTop = termBody.scrollHeight;
-        i++;
-        if (i >= reply.length) {
-          clearInterval(typeInterval);
-          printLine('empty');
-          printLine('prompt-line', '~/portfolio $ _');
-          termStatus.textContent = 'READY';
-          termStatus.className = 'term-title-status';
-          termInput.disabled = false;
-          termInput.focus();
-        }
-      }, 18);
-    } else {
-      throw new Error(data.error?.message || 'No response');
+    function openTerminal() {
+      overlay.classList.add('active');
+      isMinimized = false;
+      minBar.classList.remove('visible');
+      if (termBody.children.length === 0) {
+        printLine('system', '// Chenghong\'s portfolio terminal — powered by Claude API');
+        printLine('system', '// type your question and press Enter');
+        printLine('empty');
+        printLine('prompt-line', '~/portfolio $ _');
+      }
+      setTimeout(() => termInput.focus(), 100);
     }
-  } catch (err) {
-    thinkingEl.remove();
-    printLine('response error', `ERROR: ${err.message}`);
-    printLine('empty');
-    printLine('prompt-line', '~/portfolio $ _');
-    termStatus.textContent = 'READY';
-    termStatus.className = 'term-title-status';
-    termInput.disabled = false;
-    termInput.focus();
-  }
-}
 
-// ── TERMINAL EVENTS ──
-document.getElementById('termClose').addEventListener('click', closeTerminal);
-document.getElementById('termMinimize').addEventListener('click', minimizeTerminal);
-document.getElementById('termMax').addEventListener('click', () => {
-  const tw = document.getElementById('terminalWindow');
-  tw.style.width = tw.style.width === '98vw' ? '' : '98vw';
-  tw.style.height = tw.style.height === '92vh' ? '' : '92vh';
-});
+    function closeTerminal() {
+      overlay.classList.remove('active');
+      minBar.classList.remove('visible');
+      isMinimized = false;
+    }
 
-termInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !termInput.disabled) {
-    const val = termInput.value;
-    termInput.value = '';
-    sendMessage(val);
-  }
-});
+    function minimizeTerminal() {
+      overlay.classList.remove('active');
+      minBar.classList.add('visible');
+      isMinimized = true;
+    }
 
-minBar.addEventListener('click', openTerminal);
+    function printLine(type, text) {
+      const div = document.createElement('div');
+      div.className = `term-line ${type}`;
+      div.textContent = text;
+      termBody.appendChild(div);
+      termBody.scrollTop = termBody.scrollHeight;
+      return div;
+    }
 
-// ── HERO MAC WINDOW BUTTONS ──
-// Hero window — click anywhere opens terminal
-const macHeroInner = document.getElementById('macHeroInner');
-macHeroInner.addEventListener('mouseenter', () => {
-  macHeroInner.style.transform = 'scale(1.03)';
-  macHeroInner.style.boxShadow = '0 24px 64px rgba(0,0,0,0.9), 0 0 0 1px rgba(245,168,0,0.2)';
-});
-macHeroInner.addEventListener('mouseleave', () => {
-  macHeroInner.style.transform = 'scale(1)';
-  macHeroInner.style.boxShadow = '0 16px 48px rgba(0,0,0,0.7)';
-});
-macHeroInner.addEventListener('click', (e) => {
-  if (e.target.id === 'heroClose') {
-    const body = document.getElementById('macHeroBody');
-    if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
-    return;
-  }
-  if (e.target.id === 'heroMinimize') {
-    const body = document.getElementById('macHeroBody');
-    if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
-    return;
-  }
-  openTerminal();
-});
+    async function sendMessage(input) {
+      const userText = input.trim();
+      if (!userText) return;
 
-// ── EASTER EGG ──
-document.getElementById('easterTrigger').addEventListener('click', () => {
-  document.getElementById('easterEgg').style.display = 'block';
-});
-document.getElementById('easterClose').addEventListener('click', () => {
-  document.getElementById('easterEgg').style.display = 'none';
-});
-// draggable
-const popup = document.getElementById('macPopup');
-const popupTitle = document.getElementById('macPopupTitle');
-const eggEl = document.getElementById('easterEgg');
-let drag = false, ox = 0, oy = 0;
-popupTitle.addEventListener('mousedown', e => {
-  drag = true;
-  const r = eggEl.getBoundingClientRect();
-  ox = e.clientX - r.left; oy = e.clientY - r.top;
-});
-document.addEventListener('mousemove', e => {
-  if (!drag) return;
-  eggEl.style.left = e.clientX - ox + 'px';
-  eggEl.style.top = e.clientY - oy + 'px';
-  eggEl.style.transform = 'none';
-});
-document.addEventListener('mouseup', () => { drag = false; });
-</script>
+      // remove the blinking cursor line
+      const lastLine = termBody.lastElementChild;
+      if (lastLine && lastLine.textContent.endsWith('_')) lastLine.remove();
+
+      printLine('prompt-line', `~/portfolio $ ${userText}`);
+      printLine('empty');
+
+      conversationHistory.push({ role: 'user', content: userText });
+
+      termStatus.textContent = 'THINKING...';
+      termStatus.className = 'term-title-status thinking';
+      termInput.disabled = true;
+
+      const thinkingEl = printLine('system', '...');
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system: SYSTEM_PROMPT,
+            messages: conversationHistory
+          })
+        });
+
+        const data = await response.json();
+        thinkingEl.remove();
+
+        if (data.content && data.content[0]) {
+          const reply = data.content[0].text;
+          conversationHistory.push({ role: 'assistant', content: reply });
+
+          // type out the response
+          const replyEl = printLine('response', '');
+          let i = 0;
+          const typeInterval = setInterval(() => {
+            replyEl.textContent += reply[i];
+            termBody.scrollTop = termBody.scrollHeight;
+            i++;
+            if (i >= reply.length) {
+              clearInterval(typeInterval);
+              printLine('empty');
+              printLine('prompt-line', '~/portfolio $ _');
+              termStatus.textContent = 'READY';
+              termStatus.className = 'term-title-status';
+              termInput.disabled = false;
+              termInput.focus();
+            }
+          }, 18);
+        } else {
+          throw new Error(data.error?.message || 'No response');
+        }
+      } catch (err) {
+        thinkingEl.remove();
+        printLine('response error', `ERROR: ${err.message}`);
+        printLine('empty');
+        printLine('prompt-line', '~/portfolio $ _');
+        termStatus.textContent = 'READY';
+        termStatus.className = 'term-title-status';
+        termInput.disabled = false;
+        termInput.focus();
+      }
+    }
+
+    // ── TERMINAL EVENTS ──
+    document.getElementById('termClose').addEventListener('click', closeTerminal);
+    document.getElementById('termMinimize').addEventListener('click', minimizeTerminal);
+    document.getElementById('termMax').addEventListener('click', () => {
+      const tw = document.getElementById('terminalWindow');
+      tw.style.width = tw.style.width === '98vw' ? '' : '98vw';
+      tw.style.height = tw.style.height === '92vh' ? '' : '92vh';
+    });
+
+    termInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !termInput.disabled) {
+        const val = termInput.value;
+        termInput.value = '';
+        sendMessage(val);
+      }
+    });
+
+    minBar.addEventListener('click', openTerminal);
+
+    // ── HERO MAC WINDOW BUTTONS ──
+    // Hero window — click anywhere opens terminal
+    const macHeroInner = document.getElementById('macHeroInner');
+    macHeroInner.addEventListener('mouseenter', () => {
+      macHeroInner.style.transform = 'scale(1.03)';
+      macHeroInner.style.boxShadow = '0 24px 64px rgba(0,0,0,0.9), 0 0 0 1px rgba(245,168,0,0.2)';
+    });
+    macHeroInner.addEventListener('mouseleave', () => {
+      macHeroInner.style.transform = 'scale(1)';
+      macHeroInner.style.boxShadow = '0 16px 48px rgba(0,0,0,0.7)';
+    });
+    macHeroInner.addEventListener('click', (e) => {
+      if (e.target.id === 'heroClose') {
+        const body = document.getElementById('macHeroBody');
+        if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
+        return;
+      }
+      if (e.target.id === 'heroMinimize') {
+        const body = document.getElementById('macHeroBody');
+        if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
+        return;
+      }
+      openTerminal();
+    });
+
+    // ── EASTER EGG ──
+    document.getElementById('easterTrigger').addEventListener('click', () => {
+      document.getElementById('easterEgg').style.display = 'block';
+    });
+    document.getElementById('easterClose').addEventListener('click', () => {
+      document.getElementById('easterEgg').style.display = 'none';
+    });
+    // draggable
+    const popup = document.getElementById('macPopup');
+    const popupTitle = document.getElementById('macPopupTitle');
+    const eggEl = document.getElementById('easterEgg');
+    let drag = false, ox = 0, oy = 0;
+    popupTitle.addEventListener('mousedown', e => {
+      drag = true;
+      const r = eggEl.getBoundingClientRect();
+      ox = e.clientX - r.left; oy = e.clientY - r.top;
+    });
+    document.addEventListener('mousemove', e => {
+      if (!drag) return;
+      eggEl.style.left = e.clientX - ox + 'px';
+      eggEl.style.top = e.clientY - oy + 'px';
+      eggEl.style.transform = 'none';
+    });
+    document.addEventListener('mouseup', () => { drag = false; });
+  </script>
 </body>
+
 </html>
