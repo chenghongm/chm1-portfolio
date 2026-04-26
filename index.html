@@ -363,7 +363,7 @@
     }
 
     .section-num {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: 3px;
       color: var(--yellow);
     }
@@ -747,7 +747,7 @@
     }
 
     footer span {
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 2px;
       color: var(--dim);
     }
@@ -876,7 +876,7 @@
     }
 
     .term-title-text {
-      font-size: 12px;
+      font-size: 16px;
       letter-spacing: 1px;
       color: rgba(187, 248, 178, 0.5);
       margin-left: 4px;
@@ -917,7 +917,7 @@
     }
 
     .term-line {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.9;
       margin-bottom: 2px;
       white-space: pre-wrap;
@@ -980,7 +980,7 @@
     }
 
     .term-send-hint {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: 1px;
       color: var(--dim2);
       flex-shrink: 0;
@@ -1025,7 +1025,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 500;
-      width: 320px;
+      width: 520px;
     }
 
     .mac-popup {
@@ -1167,7 +1167,11 @@
       }
 
       #macHeroInner {
-        width: 100%;
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        z-index: auto !important;
       }
 
       #macHeroWindow .mac-btn-group {
@@ -1268,7 +1272,9 @@
 
       footer {
         padding: 20px 24px;
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        /* flex-direction:column; */
         gap: 8px;
       }
 
@@ -1342,20 +1348,20 @@
     </div>
 
     <!-- MAC WINDOW: the real interactive one -->
-    <div style="position:absolute;top:80px;right:60px;width:360px;opacity:0;animation:fadeUp 0.8s ease 1s forwards;"
+    <div style="position:fixed;top:80px;right:60px;width:360px;z-index:120;opacity:0;animation:fadeUp 0.8s ease 1s forwards;"
       id="macHeroWindow">
       <div id="macHeroInner"
-        style="background:#1e1e1e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.7);cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;">
+        style="width:100%;background:#1e1e1e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.7);cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;">
         <div class="mac-btn-group"
-          style="background:#2d2d2d;padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          style="background:#2d2d2d;padding:14px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
           <button class="mac-btn red" id="heroClose"></button>
           <button class="mac-btn yellow" id="heroMinimize"></button>
           <button class="mac-btn green" id="heroExpand"></button>
           <span
-            style="font-size:11px;letter-spacing:2px;color:rgba(255, 255, 255, 0.873);margin-left:6px;">chenghong_terminal.sh</span>
+            style="font-size:14px;letter-spacing:2px;color:rgba(255, 255, 255, 0.873);margin-left:6px;">chenghong_terminal.sh</span>
         </div>
         <div id="macHeroBody" style="padding:16px 18px;font-size:12px;line-height:2;color:rgba(245,168,0,0.8);">
-          <div style="color:var(--dim);margin-bottom:4px;font-size:11px;">// click anywhere to open terminal</div>
+          <div style="color:var(--dim);margin-bottom:4px;font-size:14px;">// click anywhere to open terminal</div>
           <div>ASK_ME_ANYTHING_READY</div>
           <div>CONTEXT: projects · stack · experience</div>
           <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
@@ -1575,7 +1581,7 @@
     <div class="contact-grid reveal">
       <a href="#" class="contact-link"> mengchh01@gmail.com</a>
       <a href="https://github.com/chenghongm" class="contact-link" target="_blank">⌥ GitHub</a>
-      <a href="#" class="contact-link">→ LinkedIn</a>
+      <a href="https://www.linkedin.com/in/chenghong-m-6ab022103" class="contact-link">→ LinkedIn</a>
     </div>
   </section>
 
@@ -1641,9 +1647,10 @@
       <div class="mac-popup-body">
         <p><strong>CHENGHONG_MENG_UNSTOPPABLE_FOUNDATION</strong></p>
         <p>LLAMA_3_PERSONALITY_SYNC_COMPLETE</p>
-        <p>TARGET_LOCKED: NEXT_OPPORTUNITY</p>
-        <p style="margin-top:16px;color:rgba(255,255,255,0.35);font-size:10px;letter-spacing:2px;">You found it. Now
-          hire me.</p>
+        <p>TARGET_LOCKED: <span style="color: #00ff88;">NEXT_OPPORTUNITY</span></p>
+        <p style="margin-top:16px;color:rgba(254, 254, 254, 0.899);font-size:14px;letter-spacing:2px;">
+          😎 You found it. Now
+          hire me, or ...Email me for more info.</p>
       </div>
       <div class="mac-popup-footer">
         <button class="mac-popup-close-btn" id="easterClose">DISMISS</button>
@@ -1740,10 +1747,20 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
       setTimeout(() => termInput.focus(), 100);
     }
 
+    function restoreMacHeroWindow() {
+      const macHeroWindow = document.getElementById('macHeroWindow');
+      const macHeroInner = document.getElementById('macHeroInner');
+      if (!macHeroWindow) return;
+
+      macHeroWindow.style.display = '';
+      if (macHeroInner) macHeroInner.style.transform = 'scale(1)';
+    }
+
     function closeTerminal() {
       overlay.classList.remove('active');
       minBar.classList.remove('visible');
       isMinimized = false;
+      restoreMacHeroWindow();
     }
 
     function minimizeTerminal() {
@@ -1850,6 +1867,7 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
 
     // ── HERO MAC WINDOW BUTTONS ──
     // Hero window — click anywhere opens terminal
+    const macHeroWindow = document.getElementById('macHeroWindow');
     const macHeroInner = document.getElementById('macHeroInner');
     macHeroInner.addEventListener('mouseenter', () => {
       macHeroInner.style.transform = 'scale(1.03)';
@@ -1861,8 +1879,7 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
     });
     macHeroInner.addEventListener('click', (e) => {
       if (e.target.id === 'heroClose') {
-        const body = document.getElementById('macHeroBody');
-        if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
+        macHeroWindow.style.display = 'none';
         return;
       }
       if (e.target.id === 'heroMinimize') {
@@ -1871,6 +1888,7 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
         return;
       }
       openTerminal();
+      macHeroWindow.style.display = 'none';
     });
 
     // ── EASTER EGG ──
