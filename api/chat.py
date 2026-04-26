@@ -51,8 +51,8 @@ class handler(BaseHTTPRequestHandler):
 
             with httpx.Client(timeout=30) as client:
                 # 3. URL 包含 API Key
-                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
-                
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-latest:generateContent?key={api_key}"
+
                 response = client.post(
                     gemini_url,
                     headers={'Content-Type': 'application/json'},
