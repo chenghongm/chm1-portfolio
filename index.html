@@ -790,6 +790,34 @@
       animation: termIn 0.25s ease;
     }
 
+    #terminalOverlay.collapsed {
+      display: block;
+      background: transparent;
+      backdrop-filter: none;
+      pointer-events: none;
+    }
+
+    #terminalOverlay.collapsed #terminalWindow {
+      position: fixed;
+      top: 80px;
+      right: 60px;
+      width: 360px !important;
+      height: auto !important;
+      z-index: 320;
+      pointer-events: auto;
+      cursor: pointer;
+      animation: none;
+    }
+
+    #terminalOverlay.collapsed .term-body,
+    #terminalOverlay.collapsed .term-input-row {
+      display: none;
+    }
+
+    #terminalOverlay.collapsed .term-titlebar {
+      border-bottom: none;
+    }
+
     @keyframes termIn {
       from {
         opacity: 0;
@@ -810,6 +838,33 @@
       gap: 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       flex-shrink: 0;
+    }
+
+    .term-title-cursor {
+      display: none;
+      width: 8px;
+      height: 14px;
+      background: var(--yellow);
+      animation: titleCursorDance 1.5s steps(2, end) infinite;
+      flex-shrink: 0;
+    }
+
+    #terminalOverlay.collapsed .term-title-cursor {
+      display: inline-block;
+    }
+
+    @keyframes titleCursorDance {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        opacity: 0.45;
+        transform: translateY(-2px) rotate(6deg);
+      }
     }
 
     .mac-btn {
@@ -880,6 +935,10 @@
       letter-spacing: 1px;
       color: rgba(187, 248, 178, 0.5);
       margin-left: 4px;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .term-title-status {
@@ -887,6 +946,7 @@
       font-size: 10px;
       letter-spacing: 2px;
       color: var(--green);
+      flex-shrink: 0;
     }
 
     .term-title-status.thinking {
@@ -1281,6 +1341,13 @@
       #terminalWindow {
         height: 90vh;
       }
+
+      #terminalOverlay.collapsed #terminalWindow {
+        top: 76px;
+        right: 24px;
+        width: min(calc(100vw - 48px), 360px) !important;
+        height: auto !important;
+      }
     }
   </style>
 </head>
@@ -1621,6 +1688,7 @@
         </div>
         <span class="term-title-text">chenghong_terminal.sh — ASK me anything</span>
         <span class="term-title-status" id="termStatus">READY</span>
+        <span class="term-title-cursor" aria-hidden="true"></span>
       </div>
       <div class="term-body" id="termBody"></div>
       <div class="term-input-row">
@@ -1721,8 +1789,12 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
 
     // ── PARALLAX ──
     const winGhost = document.getElementById('winGhost');
+    let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
       if (winGhost) winGhost.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.12}px))`;
+      if (currentScrollY > lastScrollY) minimizeTerminalFromScroll();
+      lastScrollY = currentScrollY;
     }, { passive: true });
 
     // ── TERMINAL STATE ──
@@ -1730,12 +1802,15 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
     const termBody = document.getElementById('termBody');
     const termInput = document.getElementById('termInput');
     const termStatus = document.getElementById('termStatus');
+    const terminalWindow = document.getElementById('terminalWindow');
+    const termTitlebar = document.querySelector('.term-titlebar');
     const minBar = document.getElementById('termMinBar');
     let conversationHistory = [];
     let isMinimized = false;
 
     function openTerminal() {
       overlay.classList.add('active');
+      overlay.classList.remove('collapsed');
       isMinimized = false;
       minBar.classList.remove('visible');
       if (termBody.children.length === 0) {
@@ -1758,15 +1833,34 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
 
     function closeTerminal() {
       overlay.classList.remove('active');
+      overlay.classList.remove('collapsed');
       minBar.classList.remove('visible');
       isMinimized = false;
       restoreMacHeroWindow();
     }
 
     function minimizeTerminal() {
-      overlay.classList.remove('active');
-      minBar.classList.add('visible');
+      overlay.classList.add('active', 'collapsed');
+      minBar.classList.remove('visible');
       isMinimized = true;
+      termInput.blur();
+    }
+
+    function minimizeTerminalFromScroll() {
+      if (overlay.classList.contains('collapsed')) return;
+      const macHeroWindow = document.getElementById('macHeroWindow');
+      if (macHeroWindow) macHeroWindow.style.display = 'none';
+      minimizeTerminal();
+    }
+
+    function handleTerminalScrollIntent(deltaY) {
+      if (deltaY > 0) {
+        minimizeTerminalFromScroll();
+        return;
+      }
+      if (deltaY < 0 && overlay.classList.contains('collapsed')) {
+        openTerminal();
+      }
     }
 
     function printLine(type, text) {
@@ -1849,10 +1943,31 @@ Direct. Systems-oriented. Thinks in incentives and design decisions. Enjoys reve
     // ── TERMINAL EVENTS ──
     document.getElementById('termClose').addEventListener('click', closeTerminal);
     document.getElementById('termMinimize').addEventListener('click', minimizeTerminal);
+    termTitlebar.addEventListener('click', (e) => {
+      if (!overlay.classList.contains('collapsed') || e.target.closest('.mac-btn')) return;
+      openTerminal();
+    });
+    document.addEventListener('wheel', (e) => handleTerminalScrollIntent(e.deltaY), { passive: true, capture: true });
+    window.addEventListener('wheel', (e) => handleTerminalScrollIntent(e.deltaY), { passive: true, capture: true });
+    overlay.addEventListener('wheel', (e) => handleTerminalScrollIntent(e.deltaY), { passive: true, capture: true });
+
+    let terminalTouchY = null;
+    document.addEventListener('touchstart', (e) => {
+      terminalTouchY = e.touches[0]?.clientY ?? null;
+    }, { passive: true, capture: true });
+    document.addEventListener('touchmove', (e) => {
+      if (terminalTouchY === null) return;
+      const currentTouchY = e.touches[0]?.clientY ?? terminalTouchY;
+      handleTerminalScrollIntent(terminalTouchY - currentTouchY);
+      terminalTouchY = currentTouchY;
+    }, { passive: true, capture: true });
     document.getElementById('termMax').addEventListener('click', () => {
-      const tw = document.getElementById('terminalWindow');
-      tw.style.width = tw.style.width === '98vw' ? '' : '98vw';
-      tw.style.height = tw.style.height === '92vh' ? '' : '92vh';
+      if (overlay.classList.contains('collapsed')) {
+        openTerminal();
+        return;
+      }
+      terminalWindow.style.width = terminalWindow.style.width === '98vw' ? '' : '98vw';
+      terminalWindow.style.height = terminalWindow.style.height === '92vh' ? '' : '92vh';
     });
 
     termInput.addEventListener('keydown', e => {
