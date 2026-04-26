@@ -11,6 +11,19 @@
     rel="stylesheet">
   <style>
     :root {
+      --bg: #4c78a3;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --yellow: #F5A800;
+      --yellow-dim: rgba(245, 168, 0, 0.15);
+      --green: #00ff88;
+      --green-dim: rgba(0, 255, 136, 0.08);
+      --white: #f0f0f0;
+      --dim: #dad4d4;
+      --dim2: #a99b9b;
+      --border: rgba(255, 255, 255, 0.12);
+      --c-assCorButBac: #2d2d2d;
+      --c-shaOutLg: 0 8px 24px rgba(0, 0, 0, 0.35);
       --win-bg: #c0c0c0;
       --win-bg-dark: #a6a6a6;
       --win-white: #ffffff;
@@ -69,7 +82,7 @@
     }
 
     .nav-logo {
-      font-size: 13px;
+      font-size: 16px;
       letter-spacing: 3px;
       color: var(--yellow);
       text-decoration: none;
@@ -87,7 +100,7 @@
     }
 
     .nav-links a {
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       text-decoration: none;
@@ -115,7 +128,7 @@
     }
 
     .status-item {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: 1px;
       color: #000;
       display: flex;
@@ -190,14 +203,14 @@
     }
 
     .terminal-title {
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 2px;
       color: var(--dim);
       margin-left: 8px;
     }
 
     .hero-prompt {
-      font-size: 13px;
+      font-size: 16px;
       color: var(--dim);
       margin-bottom: 16px;
       opacity: 0;
@@ -240,7 +253,7 @@
     .meta-cell {
       padding: 16px 24px;
       border-right: 1px solid var(--border);
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 1px;
     }
 
@@ -250,7 +263,7 @@
 
     .meta-label {
       color: var(--dim);
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -356,7 +369,8 @@
     }
 
     .section-label {
-      font-size: 10px;
+      font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--dim);
@@ -403,7 +417,7 @@
     .about-body {
       font-size: 15px;
       line-height: 2.1;
-      color: #aaa;
+      color: var(--dim);
       margin-bottom: 24px;
     }
 
@@ -428,13 +442,13 @@
       transform: translateY(-50%);
       background: var(--bg2);
       padding: 0 8px;
-      font-size: 10px;
+      font-size: 16px;
       letter-spacing: 2px;
-      color: var(--dim);
+      color: var(--dim2);
     }
 
     .log-line {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 2;
       color: var(--dim);
       display: flex;
@@ -447,7 +461,7 @@
     }
 
     .log-line .msg {
-      color: #999;
+      color: var(--dim);
     }
 
     .log-line .msg strong {
@@ -485,9 +499,9 @@
 
     .stack-table td:last-child {
       text-align: right;
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 2px;
-      color: #bbb;
+      color: #e6d5d5;
     }
 
     .bar {
@@ -554,9 +568,9 @@
     }
 
     .proj-desc {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 2;
-      color: #888;
+      color: var(--dim2);
       max-width: 540px;
       margin-bottom: 20px;
     }
@@ -585,7 +599,7 @@
     }
 
     .proj-status {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: 2px;
       color: var(--green);
       margin-bottom: 8px;
@@ -596,7 +610,7 @@
     }
 
     .proj-year {
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 1px;
       color: var(--dim);
     }
@@ -668,7 +682,7 @@
     .process-card p {
       font-size: 14px;
       line-height: 2;
-      color: #777;
+      color: var(--dim);
     }
 
     /* CONTACT */
@@ -1392,14 +1406,14 @@
       <p class="about-body">Full-stack engineer with a background in Biochemistry and 5+ years building production
         systems, specializing in LLM orchestration and compliance-grade workflows — seeking to apply domain knowledge in
         medical AI, drug discovery platforms, or healthcare management systems.</p>
-      <p class="about-body">Currently deep into <strong>AI tooling</strong>: local LLM fine-tuning pipelines, browser
+      <p class="about-body">Currently deep into <strong style="color: var(--yellow);">AI tooling</strong>: local LLM fine-tuning pipelines, browser
         extensions, and the intersection where backend systems meet language models.</p>
       <div class="log-block">
-        <div class="log-line"><span class="ts">2026-04</span><span class="msg">status: <strong>building</strong> · open
+        <div class="log-line"><span class="ts">2026-04</span><span class="msg">status: <strong style="color: var(--yellow);">building</strong> · open
             to opportunities</span></div>
-        <div class="log-line"><span class="ts">2026-03</span><span class="msg">continuing <strong>LLM training
+        <div class="log-line"><span class="ts">2026-03</span><span class="msg">continuing <strong style="color: var(--yellow);">LLM training
               pipeline</strong> · MLX + Llama 3</span></div>
-        <div class="log-line"><span class="ts">2026-02</span><span class="msg">published <strong>chrome
+        <div class="log-line"><span class="ts">2026-02</span><span class="msg">published <strong style="color: var(--yellow);">chrome
               extension</strong> · 4 platforms</span></div>
         <div class="log-line"><span class="ts">2026-01</span><span class="msg">debug timezone logic · production
             fix</span></div>
