@@ -74,7 +74,8 @@ class handler(BaseHTTPRequestHandler):
             #         }
             #     )
             # 提取 Gemini 的核心文本
-            answer_text = response['candidates'][0]['content']['parts'][0]['text']
+            gemini_res = response.json()
+            answer_text = gemini_res['candidates'][0]['content']['parts'][0]['text']
             
             # 构造一个“假”的 Claude 响应格式
             fake_claude_payload = {
@@ -84,7 +85,7 @@ class handler(BaseHTTPRequestHandler):
                         "text": answer_text
                     }
                 ],
-                "id": response.get("responseId", "fake_id"),
+                "id": gemini_res.get("responseId", "fake_id"),
                 "model": "gemini-3-flash-preview", # 或者是你用的版本
                 "role": "assistant"
             }
